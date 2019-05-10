@@ -14,4 +14,8 @@ function substring(someStr, startIndex, endIndex) {
     return newArr.join("");
 
 }
-console.log(substring("hello",0,3));
+console.log(substring("hello",0,3));// hel
+console.log(substring("hello",2,3));//l
+console.log(substring("ernesto",2,3));//n
+console.log(substring("hello",2,30));//hello
+console.log(substring("hello",-2,3));//hel
