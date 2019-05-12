@@ -11,9 +11,8 @@ function fib(n) {
     }
     return fib[fib.length-1]
 }
-for(let x= 0;x<16;x++){
-    console.log(fib(x));
-};
+    console.log(fib(5));
+
            
 //We also can use the golden ratio formula
 //https://www.mathsisfun.com/numbers/fibonacci-sequence.html
@@ -24,6 +23,6 @@ function fibGolden(n){
     return Math.round(result);
 }
 
-for(let x= 0;x<16;x++){
-    console.log(fibGolden(x));
-};
+
+    console.log(fibGolden(5));
+
