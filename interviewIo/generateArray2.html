@@ -1,0 +1,71 @@
+<html>
+  <body>
+    <form id="form1">
+      <label for="rows">row:</label>
+      <input id="rows" />
+      <label for="colums">colum:</label>
+      <input id="colums" />
+      <input type="submit" onClick="generateArray()" />
+      <table id="table"></table>
+    </form>
+    <script>
+      document.getElementById('form1').addEventListener('submit', (e) => {
+        e.preventDefault();
+      });
+      const generateArray = () => {
+        const rows = +document.getElementById('rows').value;
+        const colums = +document.getElementById('colums').value;
+        const arr = new Array(rows).fill(0);
+        for (let i = 0; i < arr.length; i++) {
+          arr[i] = new Array(colums).fill(0);
+        }
+        for (let i = 0; i < arr[0].length; i++) {
+          console.log('i % 2:', i % 2);
+          if (i % 2 === 0) {
+            arr[0][i] = rows * i + 1;
+          } else {
+            arr[0][i] = rows * (i + 1);
+          }
+        }
+        for (let i = 1; i < rows; i++) {
+          for (let j = 0; j < arr[0].length; j++) {
+            if (j % 2 === 0) {
+              arr[i][j] = arr[i - 1][j] + 1;
+            } else {
+              arr[i][j] = arr[i - 1][j] - 1;
+            }
+          }
+        }
+        const tbl = document.getElementById('table');
+
+        for (let i = 0; i < rows; i++) {
+          const row = document.createElement('tr');
+          for (let j = 0; j < colums; j++) {
+            const elem = document.createElement('td');
+            elem.textContent = arr[i][j];
+            row.appendChild(elem);
+          }
+          tbl.appendChild(row);
+        }
+      };
+
+      /*
+      rows = 4
+      colums = 4
+      0 1 2  3
+      1 8 9  16   even: 9 = (rows * ColIdx) + 1 , odd: 16 = rows * 4    
+      2 7 10 15
+      3 6 11 14
+      4 5 12 13
+      
+      even:
+      1: 1
+      9: rows * colidx + 1
+      odd: 
+      8: rows * (colIdx+1) = 4 * 1+1 
+      16: 4  * 4
+
+      */
+    </script>
+  </body>
+</html>

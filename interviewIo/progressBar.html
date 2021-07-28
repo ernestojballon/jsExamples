@@ -1,0 +1,55 @@
+<html>
+  <body>
+    <div id="barContainer">
+      <div id="barProgressContainer">
+        <div id="barProgress">0%</div>
+      </div>
+
+      <div id="bar"></div>
+    </div>
+    <button onclick="startProgress(2)">Start</button>
+    <button onclick="reset()">Reset</button>
+    <script>
+      const bar = document.getElementById('bar');
+      const barProgress = document.getElementById('barProgress');
+      const startProgress = (seconds) => {
+        let percentage = 0;
+        const interval1 = setInterval(() => {
+          bar.style.width = percentage + '%';
+          percentage += 1;
+          barProgress.textContent = percentage + '%';
+          if (percentage >= 100) {
+            clearInterval(interval1);
+          }
+        }, (seconds * 1000) / 100);
+      };
+      const reset = () => {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        barProgress.textContent = '0%';
+      };
+    </script>
+    <style>
+      #barProgressContainer {
+        position: absolute;
+        height: 40px;
+        width: 200px;
+        display: flex;
+        z-index: 99;
+      }
+      #barProgress {
+        margin: auto;
+      }
+      #barContainer {
+        background: gray;
+        height: 40px;
+        width: 200px;
+      }
+      #bar {
+        background: green;
+        height: 100%;
+        width: 0;
+      }
+    </style>
+  </body>
+</html>

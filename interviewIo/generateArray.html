@@ -1,0 +1,71 @@
+<html>
+  <body>
+    <form id="form">
+      <label for="rows">Rows:</label>
+      <input name="rows" id="rows" />
+      <label for="colums">Colums:</label>
+      <input name="colums" id="colums" />
+      <input type="submit" id="submit" onclick="generateArray()" />
+      <table id="table"></table>
+    </form>
+    <script>
+      document.getElementById('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+      });
+
+      const makeArray = (totalRows, totalColums) => {
+        let ar = [];
+        for (let x = 0; x < totalColums; x++) {
+          ar.push(new Array(totalRows));
+        }
+        return ar;
+      };
+      const generateArray = () => {
+        const totalRows = +document.getElementById('rows').value;
+        const totalColums = +document.getElementById('colums').value;
+        const arr = new Array(totalRows).fill(0);
+        for (let a = 0; a < arr.length; a++) {
+          arr[a] = new Array(totalColums).fill(0);
+        }
+        let col = 0;
+        let row = 0;
+        let toggle = true;
+
+        for (let c = 1; c <= totalColums * totalRows; c++) {
+          if (row < totalRows && row >= 0) {
+            arr[row][col] = c;
+            if (toggle) {
+              row++;
+            } else row--;
+          }
+          if (c === totalColums * totalRows) continue;
+          if (row === totalRows) {
+            row--;
+            col++;
+            arr[row][col] = c;
+            toggle = !toggle;
+          }
+          if (row < 0) {
+            row++;
+            col++;
+            arr[row][col] = c;
+            toggle = !toggle;
+          }
+        }
+        drawArray(arr);
+      };
+      const drawArray = (arr) => {
+        const tbl = document.getElementById('table');
+        for (let i = 0; i < arr.length; i++) {
+          const row = document.createElement('tr');
+          for (let j = 0; j < arr[i].length; j++) {
+            const item = document.createElement('td');
+            item.textContent = arr[i][j];
+            row.appendChild(item);
+          }
+          tbl.appendChild(row);
+        }
+      };
+    </script>
+  </body>
+</html>
